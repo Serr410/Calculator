@@ -93,7 +93,17 @@ void MainWindow::on_pushButton_button_clicked() {
         x += stepx;
         while ((yg > ygmax || yg < ygmin) && x <= xmax) {
             informerF.replace("x","(" + QString::number(x) + ")");
-            calc(informerF.toStdString(), answer);
+            condition = calc(informerF.toStdString(), answer);
+            y = answer;
+            xg = (xo + kx * x);
+            yg = (yo + ky * y);
+            path.moveTo(xg, yg);
+            informerF = informF;
+            x += stepx;
+        }
+        while (condition == -1 && x <= xmax) {
+            informerF.replace("x","(" + QString::number(x) + ")");
+            condition = calc(informerF.toStdString(), answer);
             y = answer;
             xg = (xo + kx * x);
             yg = (yo + ky * y);
